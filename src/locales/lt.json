@@ -1,0 +1,31 @@
+{
+  "title": "Sekimo aplikacija",
+  "map": {
+    "text": {
+      "title": "SekMane"
+    },
+    "controls": {
+      "login": "Prisijungti",
+      "logout": "Atsijungti",
+      "track": "Sekti",
+      "settings": "Nustatymai",
+      "center": "Centruoti į mane"
+    },
+    "legal": {
+      "terms": "Naudojimosi sąlygos",
+      "privacy": "Privatumo politika"
+    }
+  },
+  "login": {
+    "title": "Prisijungimas",
+    "username": "Vartotojo vardas",
+    "uuid": "Unikalus identifikatorius",
+    "login": "Prisijungti"
+  },
+  "privacy": {
+    "title": "Privatumo politika"
+  },
+  "validation": {
+    "required": "Būtina įvestis"
+  }
+}

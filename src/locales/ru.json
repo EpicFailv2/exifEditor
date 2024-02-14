@@ -1,0 +1,13 @@
+{
+  "title": "RU-Tracking app",
+  "map": {
+    "text": {
+      "title": "RU-Tracking app"
+    },
+    "controls": {
+      "login": "RU-Login",
+      "track": "RU-Track",
+      "settings": "RU-Settings"
+    }
+  }
+}
