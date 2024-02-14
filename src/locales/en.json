@@ -1,31 +1,6 @@
 {
-  "title": "Tracking app",
-  "map": {
-    "text": {
-      "title": "Trackme"
-    },
-    "controls": {
-      "login": "Login",
-      "logout": "Logout",
-      "track": "Track",
-      "settings": "Settings",
-      "center": "Center on me"
-    },
-    "legal": {
-      "terms": "terms and conditions",
-      "privacy": "privacy policy"
-    }
-  },
-  "login": {
-    "title": "Start using service",
-    "username": "Display name",
-    "uuid": "Unique identifier",
-    "login": "Enable"
-  },
-  "privacy": {
-    "title": "Privacy policy"
-  },
-  "validation": {
-    "required": "Required"
+  "title": "EXIF editor",
+  "exif": {
+    "group": "{group} group"
   }
 }

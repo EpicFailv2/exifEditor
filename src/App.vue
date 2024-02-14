@@ -1,43 +1,32 @@
 <template>
   <v-app>
+    <Toolbar />
     <v-container>
-      <v-main v-if="$store.state.rpc && $store.state.tracker">
+      <v-main v-if="ready">
         <router-view />
       </v-main>
-      <div v-else>
-        Loading...
-      </div>
+      <div v-else></div>
     </v-container>
-    <RPCHandler v-if="loadRealBackend" />
-    <RPCHandlerEmu v-if="!loadRealBackend" />
-    <TrackingHandler />
+    <ExifHandler />
   </v-app>
 </template>
 
 <script>
-import { ROUTE_LANDING } from "./utils/constants";
+import Toolbar from "./components/Toolbar.vue";
+import ExifHandler from "./handlers/ExifHandler.vue";
 export default {
   name: "App",
   data: () => ({}),
-  components: {
-    RPCHandler: () => import(/* webpackChunkName: "handlers" */ "@/handlers/RPCHandler"),
-    RPCHandlerEmu: () => import(/* webpackChunkName: "handlers" */ "@/handlers/RPCHandlerEmu"),
-    TrackingHandler: () => import(/* webpackChunkName: "handlers" */ "@/handlers/TrackingHandler")
-  },
+  components: { ExifHandler, Toolbar },
   mounted() {
     document.title = this.$t("title");
   },
   computed: {
-    appClass() {
-      return this.$route.name === ROUTE_LANDING ? "clickthrough" : "";
-    },
-    loadRealBackend() {
-      return this.$store.state.backendAccessible;
+    ready() {
+      return !!this.$store.state.exif;
     }
   },
-  beforeDestroy() {
-    if (this.$store.state.user.loggedIn) this.$store.state.rpc.exit();
-  }
+  beforeDestroy() {}
 };
 </script>
 
