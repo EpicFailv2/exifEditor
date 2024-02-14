@@ -3,12 +3,9 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./vuetify";
-import * as VueGoogleMaps from "vue2-google-maps";
 import { i18n } from "./i18n";
 
 Vue.config.productionTip = false;
-
-Vue.use(VueGoogleMaps, { load: { key: "AIzaSyDCZ79EUbHOzrvhq43-7GveIlUPMRpQQeo" } });
 
 Vue.mixin({
   data: () => ({
