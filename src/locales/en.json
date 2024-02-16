@@ -1,6 +1,62 @@
 {
-  "title": "EXIF editor",
+  "app": {
+    "title": "EXIF editor",
+    "titleShort": "EXIF"
+  },
+  "single": {
+    "load": "load image",
+    "loadNew": "load different image",
+    "filename": "Downloaded file name",
+    "download": "Download"
+  },
+  "multiple": {
+    "load": "Load multiple images",
+    "loadAdd": "Add more images",
+    "prepend": "Filename start",
+    "download": "Download",
+    "reset": "Reset",
+    "actionsHeader": "Actions",
+    "actionsSubheader": "What will be done before download",
+    "imagesHeader": "Images",
+    "imagesSubheader": "Can modify individual image names"
+  },
   "exif": {
-    "group": "{group} group"
+    "add": "add",
+    "filter": "Filter",
+    "group": "{group} parameter group",
+    "groupName": {
+      "0th": "Main",
+      "1st": "Additional",
+      "GPS": "GPS",
+      "Exif": "EXIF",
+      "Image": "Image",
+      "Interop": "Interop"
+    }
+  },
+  "exifActions": {
+    "add": "add action",
+    "actionTypes": {
+      "add": "Add",
+      "replace": "Replace",
+      "remove": "Remove"
+    },
+    "groupSelect": "Parameter group",
+    "keySelect": "Parameter key",
+    "value": "Value",
+    "inputType": {
+      "text": "Input text",
+      "number": "Input number"
+    },
+    "status": {
+      "noGroup": "Must specify parameter group",
+      "noKey": "Must specify parameter key",
+      "noValue": "Should input value",
+      "ok": "Setup correctly"
+    },
+    "eval": "{hasKey}/{outOf} images have this key, so will act on {willActUpon} images."
+  },
+  "nav": {
+    "single": "single",
+    "multiple": "multiple"
   }
 }

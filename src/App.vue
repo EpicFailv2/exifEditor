@@ -19,7 +19,7 @@ export default {
   data: () => ({}),
   components: { ExifHandler, Toolbar },
   mounted() {
-    document.title = this.$t("title");
+    document.title = this.$t("app.title");
   },
   computed: {
     ready() {

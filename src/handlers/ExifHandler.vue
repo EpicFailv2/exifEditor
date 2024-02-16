@@ -30,28 +30,6 @@ export default {
           this.latestImage = base64Str;
           this.latestFilename = file.name;
           let exifObj = piexif.load(base64Str);
-
-          console.log("piexif", piexif);
-
-          // let zeroth = exifObj["0th"];
-          // zeroth[piexif.ImageIFD.Make] = "EID platform with Piexifjs";
-          // zeroth[piexif.ImageIFD.Software] = "v!!!";
-          // zeroth[piexif.ImageIFD.ImageWidth] = 11;
-          // zeroth[piexif.ImageIFD.ImageLength] = 11;
-          // zeroth[piexif.ImageIFD.Compression] = 6; // not JPG compression level, but just indication of JPG in general
-          // exifObj.Exif[piexif.ExifIFD.DateTimeOriginal] = moment().format(DATETIME_FORMAT); // image/exif generation time
-          // let gh = this.$store.state.gps; // Gps Handler
-          // if (gh && gh.locationWatcher && gh.coordTime && gh.coordinates) {
-          //   exifObj.GPS[piexif.GPSIFD.GPSLatitudeRef] = "N";
-          //   exifObj.GPS[piexif.GPSIFD.GPSLatitude] = piexif.GPSHelper.degToDmsRational(25.25);
-          //   exifObj.GPS[piexif.GPSIFD.GPSLongitudeRef] = "E";
-          //   exifObj.GPS[piexif.GPSIFD.GPSLongitude] = piexif.GPSHelper.degToDmsRational(25.66);
-          //   exifObj.GPS[piexif.GPSIFD.GPSDateStamp] = gh.coordTime.format(DATETIME_FORMAT);
-          // }
-
-          // // download:
-          // this.latestImage = piexif.insert(piexif.dump(exifObj), piexif.remove(this.latestImage));
-
           return { base64Str, exifObj };
         })
         .catch(err => {

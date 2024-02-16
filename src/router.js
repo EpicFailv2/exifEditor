@@ -1,20 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import {} from "./utils/constants";
+import Single from "./views/Single.vue";
+import Multiple from "./views/Multiple.vue";
 
-export const ROUTE_LANDING = "landing";
+export const ROUTE_SINGLE = "single";
+export const ROUTE_MULTIPLE = "multiple";
+export const ROUTE_NAMES = [ROUTE_SINGLE, ROUTE_MULTIPLE];
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: ROUTE_LANDING,
-    component: () => import(/* webpackChunkName: "view" */ "./views/Landing.vue")
+    path: "/multiple",
+    name: ROUTE_MULTIPLE,
+    component: Multiple
+  },
+  {
+    path: "/single",
+    name: ROUTE_SINGLE,
+    component: Single
   },
   {
     path: "/*",
-    redirect: { name: "landing" }
+    redirect: { name: ROUTE_SINGLE }
   }
 ];
 
