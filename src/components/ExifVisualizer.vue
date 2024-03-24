@@ -86,7 +86,6 @@
 import piexif from "piexifjs";
 import Vue from "vue";
 import { jsonClone, scrollToElement } from "../utils/commonFunctions";
-const TYPE_MAP = { Ascii: "string", Long: "number", Short: "number", Rational: "number", Byte: "string", Undefined: "string", SRational: "number", Float: "number" };
 export default {
   name: "exif-visualizer",
   props: { exifObj: { type: Object, required: true } },
@@ -107,18 +106,6 @@ export default {
       if (!groupKey || !valKey) return;
       Vue.delete(this.exifObj[groupKey], valKey);
     },
-    exifObjToKeys(obj) {
-      return Object.keys(obj)
-        .filter(groupKey => !["thumbnail", "Interop"].includes(groupKey))
-        .map(groupKey => ({
-          key: groupKey,
-          keys: Object.keys(obj[groupKey]).map(valKey => ({
-            key: valKey,
-            ...this.tags[groupKey][valKey],
-            inputType: TYPE_MAP[this.tags[groupKey][valKey].type]
-          }))
-        }));
-    },
     add(groupKey, val) {
       console.log(groupKey, val);
       this.addMenu = false;
@@ -137,10 +124,10 @@ export default {
   },
   computed: {
     keys() {
-      return this.exifObjToKeys(this.exifObj);
+      return this.$store.state.exif.exifObjToKeys(this.exifObj);
     },
     tagsLikeKeys() {
-      return this.exifObjToKeys(this.tags).sort((a, b) => a.key.localeCompare(b.key));
+      return this.$store.state.exif.exifObjToKeys(this.tags).sort((a, b) => a.key.localeCompare(b.key));
     },
     filteredTagsLikeKeys() {
       if (!this.tagSearch) return this.tagsLikeKeys;

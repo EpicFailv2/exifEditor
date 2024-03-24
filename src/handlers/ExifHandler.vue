@@ -4,12 +4,13 @@
 
 <script>
 import piexif from "piexifjs";
-import { getBase64String } from "../utils/commonFunctions";
+import { getBase64String, jsonClone, makeNumberType } from "../utils/commonFunctions";
+const TYPE_MAP = { Ascii: "string", Long: "number", Short: "number", Rational: "number", Byte: "string", Undefined: "string", SRational: "number", Float: "number" };
 export default {
   name: "exif-handler",
   props: {},
   components: {},
-  data: () => ({ latestImage: null, latestFilename: null }),
+  data: () => ({ latestImage: null, latestFilename: null, tags: piexif.TAGS }),
   mounted() {
     this.$store.state.exif = this;
   },
@@ -56,7 +57,7 @@ export default {
      */
     downloadModifiedImage(exifObj, filename, imageBase64) {
       if (!exifObj) return;
-      this.downloadImage(filename || "mod_" + this.latestFilename, this.storeExif(exifObj, imageBase64));
+      this.downloadImage(filename || "mod_" + this.latestFilename, this.storeExif(this.retype(exifObj), imageBase64));
     },
 
     /**
@@ -74,8 +75,46 @@ export default {
       window.dlLink.href = imageBase64 || this.latestImage;
       window.dlLink.download = filename || this.latestFilename;
       window.dlLink.click();
+    },
+
+    /**
+     * Convert any exifObject to ketmap
+     * @param {Object} obj exif object
+     */
+    exifObjToKeys(obj) {
+      return Object.keys(obj)
+        .filter(groupKey => !["thumbnail", "Interop"].includes(groupKey))
+        .map(groupKey => ({
+          key: groupKey,
+          keys: Object.keys(obj[groupKey]).map(valKey => ({
+            key: valKey,
+            ...this.tags[groupKey][valKey],
+            inputType: TYPE_MAP[this.tags[groupKey][valKey].type]
+          }))
+        }));
+    },
+
+    /**
+     * Inputs make values into strings so retype numbers to numbers before packing
+     * @param {Object} obj exif object
+     */
+    retype(exifObj) {
+      if (!exifObj) throw "Must provide exifObj";
+      let rez = jsonClone(exifObj);
+      this.tagsLikeKeys.forEach(group => {
+        if (rez[group.key]) {
+          group.keys.forEach(key => {
+            if (key.inputType === "number" && typeof rez[group.key][key.key] !== "number") rez[group.key][key.key] = makeNumberType(rez[group.key][key.key]);
+          });
+        }
+      });
+      return rez;
     }
   },
-  computed: {}
+  computed: {
+    tagsLikeKeys() {
+      return this.exifObjToKeys(this.tags).sort((a, b) => a.key.localeCompare(b.key));
+    }
+  }
 };
 </script>

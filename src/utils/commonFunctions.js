@@ -976,3 +976,14 @@ export function trimStrings(obj) {
         obj[key] = obj[key].trim();
   });
 }
+
+/**
+ * Universal thing for making numbers out of strings
+ * @param {any} obj something to convert strings into numbers of
+ */
+export function makeNumberType(obj) {
+  if (Array.isArray(obj)) obj.forEach((val, index) => (obj[index] = makeNumberType(val)));
+  else if (typeof obj === "object" && obj !== null) Object.keys(obj).forEach(key => (obj[key] = makeNumberType(obj[key])));
+  else if (typeof obj === "string") return parseFloat(obj) || obj;
+  return obj;
+}

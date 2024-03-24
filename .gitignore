@@ -27,3 +27,5 @@ package-lock.json
 *- Copy*
 *.bckp.*
 package-lock.json
+start.cmd.bak
+start.cmd
